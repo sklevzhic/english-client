@@ -1,59 +1,52 @@
-import {useState} from "react";
+import MainLayout from "../../layouts/main";
+import React from 'react';
+import {useForm, Resolver} from 'react-hook-form';
 import axios from "axios";
-import { Link } from "react-router-dom";
 
+interface Inputs {
+    example: string,
+    exampleRequired: string,
+};
+
+type FormValues = {
+    rusText: string,
+    engText: string,
+    level: string,
+    lesson: string
+};
+
+const resolver: Resolver<FormValues> = async (values) => {
+    return {
+        values: values.engText ? values : {},
+        errors: !values.engText
+            ? {
+                engText: {
+                    type: 'required',
+                    message: 'This is required.',
+                },
+            }
+            : {},
+    };
+};
 const NewPhrase = () => {
 
-    const [rusText, setRusText] = useState<string>("")
-    const [engText, setEngText] = useState<string>("")
-    const handlerClickForm = () => {
-        axios.post("https://english-api.onrender.com/phrases", {
-            rusText: rusText,
-            engText: engText,
-            level: "",
-            lesson: "",
-        })
-    }
+    const {register, handleSubmit, formState: {errors}} = useForm<FormValues>({resolver});
+    const onSubmit = handleSubmit((data) => {
+        axios.post("https://english-api.onrender.com/phrases", data)
+    });
 
-    return <div>
-        <Link to={"/"}>Phrases</Link>
+    return <MainLayout>
         <div className="w-full max-w-xs">
-            <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="RUS">
-                        RUS
-                    </label>
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="username" type="text" placeholder="Username"
-                        value={rusText}
-                        onChange={(e) => setRusText(e.target.value)}
-                    />
-                </div>
-                <div className="mb-4">
-                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="ENG">
-                        ENG
-                    </label>
-                    <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        id="username" type="text" placeholder="Username"
-                        value={engText}
-                        onChange={(e) => setEngText(e.target.value)}
-                    />
-                </div>
-                <div className="flex items-center justify-between">
-                    <button
-                        onClick={handlerClickForm}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="button">
-                        Send
-                    </button>
-
-                </div>
-            </form>
+          <form onSubmit={onSubmit}>
+            <input {...register("rusText")} placeholder="Bill"/>
+            <input {...register("engText")} placeholder="Luo"/>
+            <input {...register("level")} placeholder="level"/>
+            <input {...register("lesson")} placeholder="lesson"/>
+            <input type="submit"/>
+          </form>
         </div>
 
-    </div>
+    </MainLayout>
 }
 
 export default NewPhrase

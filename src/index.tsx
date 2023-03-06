@@ -5,12 +5,12 @@ import { store } from './app/store';
 import {
     createBrowserRouter,
     RouterProvider,
-    Link,
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import Phrases from "./pages/phrases";
 import NewPhrase from "./pages/new-phrase";
+import Lessons from "./pages/lessons";
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -24,6 +24,10 @@ const router = createBrowserRouter([
         path: "/new-phrase",
         element: <NewPhrase />,
     },
+    {
+        path: "/lessons",
+        element: <Lessons />,
+    }
 ]);
 
 root.render(
