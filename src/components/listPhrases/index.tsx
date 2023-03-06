@@ -1,5 +1,5 @@
 import React, {FC} from "react";
-import {IPhrase} from "../../../../types/IPhrase";
+import {IPhrase} from "../../types/IPhrase";
 import PhraseItem from "../phraseItem";
 
 

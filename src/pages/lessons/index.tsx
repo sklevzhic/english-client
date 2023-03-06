@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import MainLayout from "../../layouts/main";
 
 const Lessons = () => {
@@ -17,11 +18,13 @@ const Lessons = () => {
             <div className="flex items-center p-4"><img src="https://tailwindui.com/img/avatar-3.jpg" alt=""
                                                         className="h-10 w-10 flex-none rounded-full"/>
                 <div className="ml-4 flex-auto">
-                    <div className="font-medium">Английский язык разговорный (А1)</div>
+                    <div className="font-medium">Английский язык разговорный (А2)</div>
                 </div>
-                <div
-                    className="pointer-events-auto ml-4 flex-none rounded-md py-[0.3125rem] px-2 font-medium text-slate-700 shadow-sm ring-1 ring-slate-700/10 hover:bg-slate-50">View
-                </div>
+                <Link to={"/lessons/a1"}>
+                    <div
+                        className="pointer-events-auto ml-4 flex-none rounded-md py-[0.3125rem] px-2 font-medium text-slate-700 shadow-sm ring-1 ring-slate-700/10 hover:bg-slate-50">View
+                    </div>
+                </Link>
             </div>
             <div className="flex items-center p-4"><img src="https://tailwindui.com/img/avatar-3.jpg" alt=""
                                                         className="h-10 w-10 flex-none rounded-full"/>

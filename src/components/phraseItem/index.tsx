@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {IPhrase} from "../../../../types";
+import {IPhrase} from "../../types";
 
 const HiddenText = ({phrase}: { phrase: IPhrase }) => {
     const {rusText, engText} = phrase

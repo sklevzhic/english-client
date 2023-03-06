@@ -11,6 +11,8 @@ import './index.css';
 import Phrases from "./pages/phrases";
 import NewPhrase from "./pages/new-phrase";
 import Lessons from "./pages/lessons";
+import LessonsItems from './pages/lessonsItems';
+import Lesson from './pages/lesson';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
     {
         path: "/lessons",
         element: <Lessons />,
+    },
+    {
+        path: "/lessons/:id",
+        element: <LessonsItems />,
+    },
+    {
+        path: "/lessons/:playlist/:lesson",
+        element: <Lesson />,
     }
 ]);
 
