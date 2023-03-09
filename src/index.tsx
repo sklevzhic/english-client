@@ -1,7 +1,7 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
+import {createRoot} from 'react-dom/client';
+import {Provider} from 'react-redux';
+import {store} from './app/store';
 import {
     createBrowserRouter,
     RouterProvider,
@@ -13,6 +13,7 @@ import NewPhrase from "./pages/new-phrase";
 import Lessons from "./pages/lessons";
 import LessonsItems from './pages/lessonsItems';
 import Lesson from './pages/lesson';
+import {QueryClient, QueryClientProvider } from 'react-query';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -20,32 +21,34 @@ const root = createRoot(container);
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Phrases />,
+        element: <Phrases/>,
     },
     {
         path: "/new-phrase",
-        element: <NewPhrase />,
+        element: <NewPhrase/>,
     },
     {
         path: "/lessons",
-        element: <Lessons />,
+        element: <Lessons/>,
     },
     {
         path: "/lessons/:id",
-        element: <LessonsItems />,
+        element: <LessonsItems/>,
     },
     {
         path: "/lessons/:playlist/:lesson",
-        element: <Lesson />,
+        element: <Lesson/>,
     }
 ]);
 
+const queryClient = new QueryClient()
+
 root.render(
-  <React.StrictMode>
-    <Provider store={store}>
-        <RouterProvider router={router} />
-    </Provider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router}/>
+        </QueryClientProvider>
+    </React.StrictMode>
 );
 
 
